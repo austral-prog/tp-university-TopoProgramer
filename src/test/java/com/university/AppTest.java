@@ -14,6 +14,6 @@ public class AppTest {
         assertDoesNotThrow(() -> App.main(new String[]{}));
 
         // Verificar que se ha creado el archivo solutions.csv
-        assertTrue(Files.exists(Paths.get("C:\\Users\\Bruno\\OneDrive\\Escritorio\\Prog II\\Trabajo Practico Final\\src\\main\\resources\\solutions.csv")), "El archivo solutions.csv no fue creado.");
+        assertTrue(Files.exists(Paths.get("src/main/resources/solutions.csv")), "El archivo solutions.csv no fue creado.");
     }
 }

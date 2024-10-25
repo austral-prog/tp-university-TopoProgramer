@@ -3,7 +3,6 @@ package com.university;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,9 +21,9 @@ public class CSVActionsTest {
 
     @Test
     public void testProcessCSV() throws IOException {
-        String inputFilePath = "C:\\Users\\Bruno\\OneDrive\\Escritorio\\Prog II\\Trabajo Practico Final\\src\\main\\resources\\input.csv";
-        String outputFilePath = "C:\\Users\\Bruno\\OneDrive\\Escritorio\\Prog II\\Trabajo Practico Final\\src\\main\\resources\\solutions.csv";
-        String expectedFilePath = "C:\\Users\\Bruno\\OneDrive\\Escritorio\\Prog II\\Trabajo Practico Final\\src\\main\\resources\\expected.csv";
+        String inputFilePath = "src/main/resources/input.csv";
+        String outputFilePath = "src/main/resources/solutions.csv";
+        String expectedFilePath = "src/main/resources/expected.csv";
 
         // Procesar el archivo CSV
         csvActions.processCSV(inputFilePath, outputFilePath);
