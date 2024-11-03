@@ -54,6 +54,11 @@ New input file:
 - `input_2.csv`: Contains additional student data.
 - `expected_2.csv`: Expected output after processing the new input file.
 
+For final exams, the grade is the sum of the grades
+For Practical Works, the grade is the last grade
+For Oral exams, the grade is the only grade they have
+For Written exams, the grade is the average grade
+
 # 3 - Submit date: October 25th - Java CSV Aggregation Assignment
 
 ## Objective
