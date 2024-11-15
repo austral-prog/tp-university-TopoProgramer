@@ -1,0 +1,4 @@
+com.university.cli.entitiesCRUDRepository.StudentCRUDRepository
+com.university.cli.entitiesCRUDRepository.SubjectCRUDRepository
+com.university.cli.entitiesCRUDRepository.ClassroomCRUDRepository
+com.university.cli.entitiesCRUDRepository.TeacherCRUDRepository

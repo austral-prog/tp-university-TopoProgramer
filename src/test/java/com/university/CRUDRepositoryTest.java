@@ -1,7 +1,10 @@
 package com.university;
 
+import com.university.cli.interfaces.CRUDRepository;
+import com.university.cli.interfaces.Entity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.university.cli.entitiesCRUDRepository.*;
 
 import java.lang.reflect.Constructor;
 import java.util.ServiceLoader;
