@@ -1,6 +1,8 @@
 package com.university.entities;
 
 import com.university.cli.interfaces.Entity;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Classroom implements Entity {
@@ -8,7 +10,15 @@ public class Classroom implements Entity {
     private String className;
     private Subject subject;
     private Teacher teacher;
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();
+
+    /**
+     *
+     * @param className el nombre de la clase
+     * @param subject la materia de la clase
+     * @param teacher teacher el profesor de la clase
+     * @param students la lista de estudiantes en la clase
+     */
 
     // Constructor
     public Classroom(String className, Subject subject, Teacher teacher, List<Student> students) {

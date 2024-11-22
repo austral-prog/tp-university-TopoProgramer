@@ -11,6 +11,10 @@ public abstract class Evaluation implements Entity {
     public Evaluation(String evaluationName) {
         this.evaluationName = evaluationName;
     }
-
+    /**
+     *
+     * @param grades la lista de notas a considerar para el cálculo
+     * @return la nota calculada
+     */
     public abstract double calculateGrade(List<Double> grades);
 }

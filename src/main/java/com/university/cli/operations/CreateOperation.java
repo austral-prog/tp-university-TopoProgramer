@@ -7,6 +7,8 @@ import com.university.entities.Student;
 import com.university.entities.Teacher;
 import com.university.entities.Subject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CreateOperation<T extends Entity> {
@@ -32,34 +34,51 @@ public class CreateOperation<T extends Entity> {
             case Student student -> {
                 System.out.print("Nombre del estudiante: ");
                 student.setName(scanner.nextLine());
+
                 System.out.print("Email del estudiante: ");
                 student.setEmail(scanner.nextLine());
             }
             case Teacher teacher -> {
                 System.out.print("Nombre del profesor: ");
                 teacher.setName(scanner.nextLine());
+
                 System.out.print("ID del profesor: ");
                 teacher.setId(Integer.parseInt(scanner.nextLine()));
             }
             case Subject subject -> {
                 System.out.print("Nombre de la materia: ");
                 subject.setSubjectName(scanner.nextLine());
-                System.out.print("Nombre del profesor asignado: ");
-                Teacher assignedTeacher = new Teacher();
-                assignedTeacher.setName(scanner.nextLine());
-                subject.setTeacher(assignedTeacher);
+
+                Teacher teacher = new Teacher();
+
+                System.out.print("Nombre del profesor: ");
+                subject.setTeacher(teacher);
+
             }
             case Classroom classroom -> {
+                List<Student> listOfStudents = new ArrayList<>();
+
+                System.out.print("Nombre del estudiante: ");
+                String studentName = scanner.nextLine();
+                System.out.print("Email del estudiante: ");
+                String studentEmail = scanner.nextLine();
+                Student assignedStudent = new Student(studentName, studentEmail);
+                listOfStudents.add(assignedStudent);
+
+                System.out.print("Nombre del profesor asignado: ");
+                String teacherName = scanner.nextLine();
+                Teacher assignedTeacher = new Teacher(teacherName);
+                classroom.setTeacher(assignedTeacher);
+
+                System.out.print("Nombre de la materia: ");
+                String subjectName = scanner.nextLine();
+                Subject assignedSubject = new Subject(subjectName, assignedTeacher);
+                classroom.setSubject(assignedSubject);
+
                 System.out.print("Nombre de la clase (ej. 3B): ");
-                classroom.setClassName(scanner.nextLine());
-                System.out.print("Nombre del sujeto: ");
-                Subject subject = new Subject();
-                subject.setSubjectName(scanner.nextLine());
-                classroom.setSubject(subject);
-                System.out.print("Nombre del profesor: ");
-                Teacher teacher = new Teacher();
-                teacher.setName(scanner.nextLine());
-                classroom.setTeacher(teacher);
+                String className = scanner.nextLine();
+                classroom.setClassName(className);
+                classroom.setStudents(listOfStudents); // Asigna la lista de estudiantes a la clase
             }
             case null, default -> System.out.println("Entidad no reconocida.");
         }

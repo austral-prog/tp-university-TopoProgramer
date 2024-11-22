@@ -15,6 +15,12 @@ public class CsvReader_tp1 implements CsvRead<Map<String, Integer>> {
         this.studentSubjectMap = new HashMap<>();
     }
 
+    /**
+     * Lee datos desde un archivo CSV y los procesa.
+     *
+     * @param filePath la ruta del archivo CSV a leer
+     * @throws IOException si ocurre un error de lectura
+     */
     @Override
     public void read(String filePath) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -23,11 +29,8 @@ public class CsvReader_tp1 implements CsvRead<Map<String, Integer>> {
 
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                String classroom = values[0]; // El nombre del aula, no se usa en este caso
                 String subjectName = values[1]; // Nombre de la materia
                 String studentName = values[2]; // Nombre del estudiante
-                String studentEmail = values[3]; // Correo del estudiante (no se usa en este caso)
-                String teacherName = values[4]; // Nombre del profesor, no se usa en este caso
 
                 // Añadir la materia al conjunto de materias del estudiante
                 studentSubjectMap.putIfAbsent(studentName, new HashSet<>());
@@ -36,10 +39,15 @@ public class CsvReader_tp1 implements CsvRead<Map<String, Integer>> {
         }
     }
 
+    /**
+     * Obtiene el conteo de materias por estudiante.
+     *
+     * @return un mapa que asocia el nombre del estudiante con el número de materias
+     */
     public Map<String, Integer> getStudentSubjectCount() {
         Map<String, Integer> studentSubjectCount = new HashMap<>();
 
-        // Para cada estudiante, obtener la cantidad de materias distintas en las que está inscrito
+        // Contar las materias distintas para cada estudiante
         for (Map.Entry<String, Set<String>> entry : studentSubjectMap.entrySet()) {
             studentSubjectCount.put(entry.getKey(), entry.getValue().size());
         }

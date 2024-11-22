@@ -14,6 +14,13 @@ public class CsvWriteable_tp2 implements CsvWrite<List<StudentEvaluationDetails>
     private final GradeCalculator calculator = new GradeCalculator();
     private final SolutionProcessor processor = new SolutionProcessor();
 
+    /**
+     * Escribe datos de evaluaciones de estudiantes en un archivo CSV.
+     *
+     * @param filePath la ruta del archivo CSV a escribir
+     * @param data la lista de detalles de evaluaciones de estudiantes
+     * @throws IOException si ocurre un error de escritura
+     */
     @Override
     public void write(String filePath, List<StudentEvaluationDetails> data) throws IOException {
         Map<String, List<Double>> gradesMap = new HashMap<>();

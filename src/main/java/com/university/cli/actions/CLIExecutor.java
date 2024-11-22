@@ -13,6 +13,13 @@ import java.util.Scanner;
 public class CLIExecutor implements CLI {
     private final Scanner scanner = new Scanner(System.in);
 
+    /**
+     *
+     * @param crudInterfaces an array of CRUDInterface instances, each representing a different entity type.
+     *                       Each CRUDInterface allows the CLI to perform Create, Read, Update, and Delete
+     *                       operations on that specific entity type.
+     */
+
     @Override
     public void runCLI(CRUDRepository<?>[] crudInterfaces) {
         while (true) {
@@ -32,6 +39,11 @@ public class CLIExecutor implements CLI {
         }
     }
 
+    /**
+     *
+     * @param crudInterfaces un array de interfaces CRUDRepository para diferentes entidades
+     */
+
     private void mostrarMenu(CRUDRepository<?>[] crudInterfaces) {
         System.out.println("Seleccione una entidad para operar:");
         for (int i = 0; i < crudInterfaces.length; i++) {
@@ -39,6 +51,12 @@ public class CLIExecutor implements CLI {
         }
         System.out.println("0. Salir");
     }
+
+    /**
+     *
+     * @param maxOption el número máximo de opciones válidas
+     * @return la opción seleccionada por el usuario
+     */
 
     private int obtenerOpcionMenu(int maxOption) {
         int choice = -1;
@@ -57,6 +75,11 @@ public class CLIExecutor implements CLI {
         }
         return choice;
     }
+
+    /**
+     *
+     * @param crud la interfaz CRUDRepository seleccionada
+     */
 
     private <T extends Entity> void handleCRUDOperations(CRUDRepository<T> crud) {
         System.out.println("Operaciones CRUD disponibles:");

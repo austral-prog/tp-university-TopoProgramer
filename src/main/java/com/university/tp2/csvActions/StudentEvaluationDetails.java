@@ -7,6 +7,15 @@ public class StudentEvaluationDetails {
     private String evaluationName;
     private double grade;
 
+    /**
+     *
+     * @param studentName el nombre del estudiante
+     * @param subject la materia de la evaluación
+     * @param evaluationType el tipo de evaluación
+     * @param evaluationName el nombre de la evaluación
+     * @param grade la nota de la evaluación
+     */
+
     public StudentEvaluationDetails(String studentName, String subject, String evaluationType, String evaluationName, double grade) {
         this.studentName = studentName;
         this.subject = subject;

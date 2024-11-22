@@ -8,6 +8,10 @@ import com.university.cli.actions.CLIExecutor;
 import com.university.cli.interfaces.CRUDRepository;
 
 public class Application {
+    /**
+     * Método de inicio de la aplicación.
+     * Configura los repositorios y ejecuta la interfaz de línea de comandos.
+     */
     public void start() {
         // Crear repositorios
         CRUDRepository<?>[] crudRepositories = new CRUDRepository<?>[] {

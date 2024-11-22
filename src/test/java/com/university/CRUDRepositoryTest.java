@@ -2,11 +2,16 @@ package com.university;
 
 import com.university.cli.interfaces.CRUDRepository;
 import com.university.cli.interfaces.Entity;
+import com.university.entities.Classroom;
+import com.university.entities.Subject;
+import com.university.entities.Teacher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.university.cli.entitiesCRUDRepository.*;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ServiceLoader;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -55,7 +60,7 @@ class CRUDRepositoryTest {
     }
 
     @Test
-    void testServiceLoaderLoadsAllCRUDRepositorys() {
+    void testServiceLoaderLoadsAllCRUDRepositories() {
         // Ensure that at least one CRUDRepository implementation is found
         boolean found = serviceLoader.iterator().hasNext();
         assertTrue(found, "No CRUDRepository implementations found");
@@ -94,17 +99,35 @@ class CRUDRepositoryTest {
 
     private Entity createTestEntity(CRUDRepository<? extends Entity> crudRepository) {
         try {
-            // Get the entity class from the CRUD repository
+            // Obtener la clase de la entidad desde el CRUD repository
             Class<? extends Entity> entityClass = crudRepository.getEntityClass();
 
-            // Use reflection to create a new instance of the entity class
+            // Usar la reflexión para crear una nueva instancia de la clase de la entidad
             Constructor<? extends Entity> constructor = entityClass.getDeclaredConstructor();
+            constructor.setAccessible(true);
             Entity entity = constructor.newInstance();
 
-            // Set the ID and name (or other fields as needed)
-            entity.setId(1);  // Set the ID, you can adjust this logic
-            if (entity instanceof TestEntity) {
-                ((TestEntity) entity).setName("Test Entity");
+            // Asignar ID y otros campos necesarios
+            entity.setId(1); // Establecer ID
+
+            Field[] fields = entityClass.getDeclaredFields();
+            System.out.println(Arrays.toString(fields.clone()));
+            for (Field field : fields) {
+                field.setAccessible(true); // Permitir acceso a campos privados
+
+                // Asignar datos de ejemplo según el tipo de campo o nombre
+                if (field.getType() == String.class) {
+                    field.set(entity, "Example " + field.getName()); // Asignar un ejemplo de nombre
+                } else if (field.getType() == int.class || field.getType() == Integer.class) {
+                    field.set(entity, 1);
+                } else if (field.getType() == Subject.class) {
+                    field.set(entity, new Subject("Example Subject", new Teacher("Example Teacher"))); // Asignar una nueva instancia de Subject con un Teacher
+                } else if (field.getType() == Teacher.class) {
+                    field.set(entity, new Teacher("Example Teacher")); // Asignar una nueva instancia de Teacher
+                } else if (field.getType() == Classroom.class) {
+                    field.set(entity, new Classroom("Example Class", new Subject("Example Subject", new Teacher("Example Teacher")), new Teacher("Example Teacher"), new ArrayList<>())); // Asignar una nueva instancia de Classroom
+                }
+                // Agregar más verificaciones de tipo según sea necesario
             }
 
             return entity;
@@ -116,17 +139,34 @@ class CRUDRepositoryTest {
 
     private Entity updateTestEntity(CRUDRepository<? extends Entity> crudRepository) {
         try {
-            // Get the entity class from the CRUD repository
+            // Obtener la clase de la entidad desde el CRUD repository
             Class<? extends Entity> entityClass = crudRepository.getEntityClass();
 
-            // Use reflection to create a new instance of the entity class
+            // Usar la reflexión para crear una nueva instancia de la clase de la entidad
             Constructor<? extends Entity> constructor = entityClass.getDeclaredConstructor();
+            constructor.setAccessible(true);
             Entity entity = constructor.newInstance();
 
-            // Set the ID and updated name (or other fields as needed)
-            entity.setId(1);  // ID remains the same for update
-            if (entity instanceof TestEntity) {
-                ((TestEntity) entity).setName("Updated Test Entity");
+            // Asignar ID y campos de ejemplo actualizados
+            entity.setId(1); // Mantener el ID para la actualización
+
+            Field[] fields = entityClass.getDeclaredFields();
+            for (Field field : fields) {
+                field.setAccessible(true); // Permitir acceso a campos privados
+
+                // Asignar datos de ejemplo actualizados según el tipo de campo o nombre
+                if (field.getType() == String.class) {
+                    field.set(entity, "Updated Example " + field.getName()); // Asignar un nombre de ejemplo actualizado
+                } else if (field.getType() == int.class || field.getType() == Integer.class) {
+                    field.set(entity, 2); // Asignar un valor diferente para la actualización
+                } else if (field.getType() == Subject.class) {
+                    field.set(entity, new Subject("Updated Example Subject", new Teacher("Updated Example Teacher"))); // Asignar una nueva instancia de Subject con un Teacher actualizado
+                } else if (field.getType() == Teacher.class) {
+                    field.set(entity, new Teacher("Updated Example Teacher")); // Asignar una nueva instancia de Teacher
+                } else if (field.getType() == Classroom.class) {
+                    field.set(entity, new Classroom("Updated Example Class", new Subject("Updated Example Subject", new Teacher("Updated Example Teacher")), new Teacher("Updated Example Teacher"), new ArrayList<>())); // Asignar una nueva instancia de Classroom
+                }
+                // Agregar más verificaciones de tipo según sea necesario
             }
 
             return entity;

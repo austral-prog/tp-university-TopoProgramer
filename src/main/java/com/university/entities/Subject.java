@@ -17,7 +17,6 @@ public class Subject implements Entity {
 
     }
 
-
     // Getters y Setters
     public String getSubjectName() {
         return subjectName;
@@ -25,10 +24,6 @@ public class Subject implements Entity {
 
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
-    }
-
-    public Teacher getTeacher() {
-        return teacher;
     }
 
     public void setTeacher(Teacher teacher) {

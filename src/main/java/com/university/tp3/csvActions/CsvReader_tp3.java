@@ -1,13 +1,19 @@
 package com.university.tp3.csvActions;
 
 import com.university.tp3.ApprovalCriteria;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CsvReader_tp3 {
 
+    /**
+     * Lee un archivo CSV y crea una lista de objetos ApprovalCriteria.
+     *
+     * @param inputFilePath la ruta del archivo CSV a leer
+     * @return una lista de objetos ApprovalCriteria
+     * @throws IOException si ocurre un error de lectura
+     */
     public List<ApprovalCriteria> read(String inputFilePath) throws IOException {
         List<ApprovalCriteria> criteriaList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(inputFilePath))) {
@@ -28,8 +34,8 @@ public class CsvReader_tp3 {
                     continue; // O puedes lanzar una excepción personalizada si lo prefieres
                 }
 
-                String subject = fields[0];
-                String criteriaType = fields[1];
+                String subject = fields[0];         // Nombre de la materia
+                String criteriaType = fields[1];    // Tipo de criterio
                 double criteriaValue = 0;
 
                 // Validar la conversión de criteriaValue
